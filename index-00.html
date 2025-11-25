@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>effet Survol</title>
+    <style>
+        @font-face {
+        font-family: "Aujournuit";
+        src: url("Aujournuit-Condensed.woff2") format("woff2");
+        }
+
+    body{
+        font-family: "Aujournuit";
+    }
+        .item-easy,
+        .item-cible{
+            width: 100px;
+            height:100px;
+            background: #9a001f;
+            transition: all 1s;
+        }
+        .item-easy:hover{
+            cursor: pointer;
+            background: #df3aad;
+            transform: scale(0.2) rotate(20deg);
+            
+        }
+
+        .item-parent{
+            background: #f78a8a;
+            height: 100px;
+        }
+
+        .item-parent:hover .item-cible{
+            transform: translateX(100px);
+        }
+
+        /* GIRD */
+        .item{
+            display: grid;
+            place-items: center;
+            color: #fff;
+            text-decoration: none;
+            background: #000;
+            font-size: 40px;
+        }
+        .item img, .item .desc{
+            grid-column: 1/-1;
+            grid-row: 1/-1;
+            transition: opacity 0.3s;
+        }
+        .item .desc{
+            opacity: 0;
+            /* background: #000;  */
+            padding: 12px;
+            border-radius: 3px;
+        }
+        .item:hover .desc{
+            opacity: 1;
+            z-index: 999;
+        }
+
+        .item:hover img{
+            opacity: 0.2;
+        }
+
+    
+
+
+    </style>
+</head>
+<body>
+    <h1>Survol facile</h1>
+    <div class="item-easy"></div>
+
+     <h1>Survol imbriqué</h1>   
+    <div class="item-parent">
+        <div class="item-cible"></div>
+    </div>
+
+    <h1>combo avec grid + img</h1>
+    <a href="" class="item">
+        <img src="https://picsum.photos/200/300" alt="demo">
+        <div class="desc">coucou</div>
+        <br>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum, exercitationem. Nisi obcaecati dolores est itaque, incidunt ducimus similique harum culpa animi officiis ipsa? Perspiciatis tempore autem quos perferendis eveniet reiciendis.</p>
+    </a>
+    
+</body>
+</html>

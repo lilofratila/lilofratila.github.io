@@ -1,68 +1,338 @@
 @font-face {
-    font-family: "RX100";
-    src: url(RX100-Regular.woff2)format ("woff2");
+    font-family: "clashGrotesk";
+    src: url(ClashGrotesk-Variable.woff2) format("woff2");
 }
 
-*{
-
+* {
     box-sizing: border-box;
 }
-    body{
-    background: rgb(255, 249, 216);
-    font-family: "RX100", sans-serif;
-  font-optical-sizing: auto;
-}
 
-h1{
+body {
+    background: #000000;
+    font-family: "clashGrotesk", sans-serif;
+    font-optical-sizing: auto;
     margin: 0;
 }
 
-img{
+h1 {
+    margin: 0;
+}
+
+img {
     max-width: 100%;
     height: auto;
     display: block;
+    border-radius: 2px;
+    justify-content: right;
 }
-p{
+
+p {
     max-width: 600px;
 }
 
-/* header */
-.header{
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
-    margin-bottom: 30px;
+/**BANNDEAU DÉFILANT EN HAUT**/
+.stage-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+
+    background: rgba(0, 0, 0, 0.25);
+    /* translucide */
+    backdrop-filter: blur(8px);
+    /* floute ce qu’il y a derrière */
+    -webkit-backdrop-filter: blur(8px);
+    /* pour Safari */
+    color: #fff;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    z-index: 999;
+    /*border-bottom: 2px solid #000000;*/
 }
-.header a{
+
+/* Texte qui défile */
+.stage-text {
+    display: inline-block;
+    margin-top: 13px;
+    padding-left: 100%;
+    /* commence à droite */
+    animation: slide-text 15s linear infinite;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+/* Animation */
+@keyframes slide-text {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+/* header */
+.header {
+    z-index: 9999;
+    font-size: 15px;
+    display: block;
+    position: fixed;
+    font-style: bold;
+    left: 0;
+    top: 0;
+    width: 130px;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 80px 1fr 50px 50px 50px 20px;
+    justify-content: space-between;
+    /* image en haut, liens en bas */
+    padding: 10px;
+    background: #ffffff;
+    border-right: 1px solid #000000;
+    /*ligne*/
+}
+
+/* Liens */
+.header a {
+    display: block;
     text-decoration: none;
     color: currentColor;
+    margin: 10px 0;
+    margin-bottom: 0px;
+    font-weight: lighter;
+}
+
+.lien {
+    border: solid black 1px;
+    color: white;
+    border-radius: 50px;
+    background: rgb(0, 0, 0);
+    font-weight: bold;
+    place-items: center;
+    margin-bottom: 5px;
 
 }
 
-.nav{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,200px);
-    justify-content: center;
-    gap:12px;
+@media (max-width: 700px) {
+    .header {
+        margin-top: 50px;
+        
+    }
+
+    .lien a{
+        font-size: xx-small;
+    }
 }
 
-.nav a{
+/* Fenêtre flottante (invisible par défaut) */
+.popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 260px;
+    background: #000000;
+    border: 1px solid #000;
+    border-radius: 30px;
+    padding: 15px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+    z-index: 9999;
+    font-weight: 200;
+}
+
+/* Quand le popup est ciblé via :target → il apparaît */
+.popup:target {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0px);
+}
+
+/* Bouton fermer */
+.popup .close {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: black;
+    color: white;
     text-decoration: none;
-    color:currentColor;
-    font-size: 10px;}
+    font-weight: 300;
+    /* rende la croix plus fine */
+    font-size: 14px;
+    /* taille plus petite et élégante */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+}
 
-.nav a span{
+/* Style du contenu */
+.popup p {
+    margin: 0;
+    font-style: bold;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+
+.popup a {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+}
+
+.popup-img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.popup strong {
+    font-size: medium;
+    font-weight: bold;
+}
+
+
+/* accueil projet */
+
+.nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-left: 130px;
+    margin-bottom: 10px;
+}
+
+/* MOBILE : 1 colonne */
+@media (max-width: 700px) {
+    .header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* plein écran */
+        height: auto;
+        /* plus de hauteur verticale */
+        display: flex;
+        /* horizontal */
+        justify-content: space-between;
+        align-items: center;
+        padding:  15px;
+        border-right: none;
+        /* plus de barre sur la gauche */
+        border-bottom: 1px solid #000;
+        /* fine ligne sous le header */
+        
+    }
+
+    .header h1 img {
+        width: 80px;
+        /* logo plus petit */
+    }
+
+    .header a {
+        margin: 0 5px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    /* Le contenu ne doit plus être poussé par la marge gauche */
+    .nav,
+    .bandeau,
+    .projet {
+        margin-left: 0 !important;
+        margin-top: 0px;
+        /* espace sous le header */
+    }
+
+}
+
+.nav a span {
     display: block;
     padding: 12px;
+    text-align: center;
 }
 
 /** page projet**/
 
-.projet{
-    background: rgb(255, 0, 208);
-    color: aliceblue;
+.projet {
+    background: rgb(255, 255, 255);
+    z-index: -999;
+    margin-left: 160px;
+    margin-top: 40px;
 }
 
-.projet h1{
-    font-size: 100px;
+.projet h1 {
+    margin-left: 10px;
+    font-size: 70px;
+}
+
+.projet nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+
+/* MOBILE : 1 colonne */
+@media (max-width: 700px) {
+    .nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-left: 130;
+    }
+
+}
+
+.nav a span {
+    display: block;
+    padding: 12px;
+    text-align: center;
+}
+
+
+/* image pleine largeur dans la colonne */
+.item {
+    display: grid;
+    place-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+
+}
+
+.item img,
+.item .desc {
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+    transition: opacity 0.3s;
+
+}
+
+.item .desc {
+    opacity: 0;
+    /* background: #000;  */
+    padding: 12px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.item:hover .desc {
+    opacity: 1;
+    z-index: 99;
+
+}
+
+.item:hover img {
+    opacity: 0.3;
 }
