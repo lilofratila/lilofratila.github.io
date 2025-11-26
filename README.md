@@ -1,1 +1,1 @@
-lilo.fratila.github.io
+lilo.fratila.github.io/
